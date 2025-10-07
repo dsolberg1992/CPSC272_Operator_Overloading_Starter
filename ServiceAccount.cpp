@@ -24,8 +24,7 @@ ServiceAccount::ServiceAccount() {
  * @param id Account identifier (must be 4 characters)
  * @param passwd Account password (must be at least 8 characters)
  * @param balance Initial balance (must be non-negative)
- * 
- * Uses setter methods to ensure validation rules are applied
+ * * Uses setter methods to ensure validation rules are applied
  */
 ServiceAccount::ServiceAccount(std::string id, std::string passwd, double balance) {
     this->setBalance(balance);
@@ -60,8 +59,7 @@ std::string ServiceAccount::getPassword() const {
 /**
  * @brief Setter for account password with validation
  * @param password New password to set
- * 
- * Validates that password is at least 8 characters long.
+ * * Validates that password is at least 8 characters long.
  * If validation fails, prints error message and leaves password unchanged.
  */
 void ServiceAccount::setPassword(std::string password) {
@@ -74,8 +72,7 @@ void ServiceAccount::setPassword(std::string password) {
 /**
  * @brief Setter for account identifier with validation
  * @param identifier New identifier to set
- * 
- * Validates that identifier is exactly 4 characters long.
+ * * Validates that identifier is exactly 4 characters long.
  * If validation fails, prints error message and leaves identifier unchanged.
  */
 void ServiceAccount::setIdentifier(std::string identifier) {
@@ -88,8 +85,7 @@ void ServiceAccount::setIdentifier(std::string identifier) {
 /**
  * @brief Setter for account balance with validation
  * @param balance New balance to set
- * 
- * Validates that balance is non-negative.
+ * * Validates that balance is non-negative.
  * If validation fails, prints error message and leaves balance unchanged.
  */
 void ServiceAccount::setBalance(double balance) {
@@ -104,8 +100,7 @@ void ServiceAccount::setBalance(double balance) {
  * @param a First ServiceAccount to compare
  * @param b Second ServiceAccount to compare
  * @return true if both accounts have equal balances, false otherwise
- * 
- * Note: Comparison is based solely on account balance, not identifier or password
+ * * Note: Comparison is based solely on account balance, not identifier or password
  */
 bool operator==(const ServiceAccount& a, const ServiceAccount& b) {
     return a.getBalance() == b.getBalance();
@@ -116,12 +111,19 @@ bool operator==(const ServiceAccount& a, const ServiceAccount& b) {
  * @param a Left-hand ServiceAccount
  * @param b Right-hand ServiceAccount
  * @return true if account 'a' has a greater balance than account 'b', false otherwise
- * 
- * Note: Comparison is based solely on account balance, not identifier or password
+ * * Note: Comparison is based solely on account balance, not identifier or password
  */
 bool operator>(const ServiceAccount& a, const ServiceAccount& b) {
     return a.getBalance() > b.getBalance();
 }
 
-
-
+/**
+ * @brief Less-than operator implementation (NEW)
+ * @param other The ServiceAccount object to compare against (the right-hand side)
+ * @return true if the calling object's balance is less than the other object's balance, false otherwise
+ * @note Comparison is based solely on account balance.
+ */
+bool ServiceAccount::operator<(const ServiceAccount& other) const {
+    // Note: Can access 'other.accountBalance' because the operator is a member function
+    return accountBalance < other.accountBalance;
+}
